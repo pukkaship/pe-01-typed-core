@@ -1,0 +1,7 @@
+[
+  { "name": "veggie omelette", "carb_score": 2, "protein_score": 2, "fibre_score": 3, "fat_score": 1 },
+  { "name": "lentil soup",     "carb_score": 3, "protein_score": 3, "fibre_score": 3, "fat_score": 1 },
+  { "name": "pasta bake",      "carb_score": 5, "protein_score": 2, "fibre_score": 1, "fat_score": 3 },
+  { "name": "plain crackers",  "carb_score": 3, "protein_score": 0, "fibre_score": 0, "fat_score": 0 },
+  { "name": "grilled chicken", "carb_score": 1, "protein_score": 4, "fibre_score": 2, "fat_score": 3 }
+]
