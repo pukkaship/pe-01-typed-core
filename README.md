@@ -53,6 +53,13 @@ automatically after sign-up. The welcome page walks you through **Open in Cursor
 Then read [`docs/cursor-setup.md`](docs/cursor-setup.md) (2 min) and continue with the Day-1
 orientation below.
 
+```bash
+node -v          # need 20+ (22 recommended — see .nvmrc)
+npm install      # first time only; re-run after pulling dependency changes
+npm run begin    # fails until hypothesis.md is complete
+npm test         # one test fails (Bug 1) — start there
+```
+
 ## How to proceed — one bug at a time
 
 You do not fix everything at once. Each fix is checked before the next bug's test is revealed.

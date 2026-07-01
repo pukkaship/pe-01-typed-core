@@ -17,7 +17,7 @@ jobs:
           cache: "npm"
 
       - name: Install
-        run: npm ci
+        run: npm ci --strict-allow-scripts=true
 
       - name: Typecheck (strict)
         run: npm run typecheck
