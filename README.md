@@ -35,7 +35,7 @@ grilled chicken → balanced
 
 ## Before touching code — Day 1 (~45 min + video)
 
-▶ **[Orientation video — 5 min](VIDEO_URL_PLACEHOLDER)** — watch first.
+▶ **[Orientation video — 5 min](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/429f3e5831265167bcad9bc544db3395/watch)** — watch first.
 ▶ **[How to read a TypeScript error — 3 min](DEMO_VIDEO_URL_PLACEHOLDER)** — linked from the micro-loop.
 
 1. [`docs/day1-architecture-story.md`](docs/day1-architecture-story.md) — 15 min
