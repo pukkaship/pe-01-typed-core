@@ -62,11 +62,44 @@ for (let i = 1; i <= 5; i++) {
   }
 }
 
-// 7. PR body section (only when a PR body is available).
+// 7. Discovery check: Bug 3's test must do more than assert a successful array load.
+//    It must assert the promise rejects (rejects.toThrow) or throws on a missing file.
+const bug03Path = "src/__tests__/bug-03.test.ts";
+if (fs.existsSync(bug03Path)) {
+  const bug03 = fs.readFileSync(bug03Path, "utf8");
+  const assertsReject = /rejects\.toThrow|rejects\.toMatch|toThrow|\.rejects/i.test(bug03);
+  if (!assertsReject) {
+    failures.push(
+      "bug-03.test.ts still only checks that loadMeals returns an array \u2014 rewrite it to assert " +
+      "the promise rejects when the file is missing. That is the discovery: a successful return " +
+      "is not proof the file was found."
+    );
+  }
+}
+
+// 8. Discovery check: Bug 5's test must do more than assert a valid input scores successfully.
+//    It must assert scoreMeal throws on invalid input (missing field or non-numeric score).
+const bug05Path = "src/__tests__/bug-05.test.ts";
+if (fs.existsSync(bug05Path)) {
+  const bug05 = fs.readFileSync(bug05Path, "utf8");
+  const assertsThrow = /\.toThrow|toThrow\(\)|toThrowError|rejects\.toThrow/i.test(bug05);
+  if (!assertsThrow) {
+    failures.push(
+      "bug-05.test.ts still only checks that a valid meal scores correctly \u2014 rewrite it to assert " +
+      "scoreMeal throws when a field is missing or not a number. That is the discovery: " +
+      "a confident answer is not proof the input was valid."
+    );
+  }
+}
+
+// 9. PR body sections (only when a PR body is available).
 const prBody = process.env.PR_BODY || (fs.existsSync("PR_BODY.md") ? fs.readFileSync("PR_BODY.md", "utf8") : "");
 if (prBody) {
   if (!/why each fix was necessary/i.test(prBody)) {
     failures.push('PR description must include a section titled "Why each fix was necessary"');
+  }
+  if (!/discovery/i.test(prBody)) {
+    failures.push('PR description must include a "Discovery" section (how you found the bugs nothing pointed you to \u2014 Bugs 3 and 5)');
   }
 } else {
   console.log("\u2139 No PR body found (PR_BODY env or PR_BODY.md). Skipping PR-section check locally.");

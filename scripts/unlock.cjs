@@ -38,9 +38,9 @@ const wordCount = journal.split(/\s+/).filter(Boolean).length;
 const keywords = {
   1: [/strict|any|interface/i],
   2: [/json|parse|throw|boundary/i],
-  3: [/async|await|silent|swallow/i],
+  3: [/discover|silent|rejects|missing|found/i],  // discovery: investigation language
   4: [/balanced|operator|\band\b|&&/i],
-  5: [/invalid|guard|throw|exit/i],
+  5: [/discover|invalid|throw|exit|confident/i],  // discovery: investigation language
 };
 
 const failures = [];

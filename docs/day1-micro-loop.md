@@ -1,8 +1,5 @@
 # Day 1 — The debugging micro-loop
 
-> ▶ A 3-minute "how to read a TypeScript error" demo is linked at the top of the README.
-> Watch it, then read this.
-
 One page. This is the loop you run for every single bug, this week and every week.
 
 ```
