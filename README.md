@@ -39,7 +39,7 @@ grilled chicken → balanced
 
 ## Before touching code — Day 1 (~55 min + video)
 
-▶ **[Orientation video — 5 min](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/429f3e5831265167bcad9bc544db3395/watch)** — watch first.
+▶ **[Orientation video — 5 min](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/8dc7bc43f2bafbb5bfe27b49748e6daf/watch)** — watch first.
 
 1. [`docs/day1-nudge-intro.md`](docs/day1-nudge-intro.md) — 5 min — the story this program follows
 2. [`docs/day1-architecture-story.md`](docs/day1-architecture-story.md) — 15 min
@@ -80,8 +80,9 @@ You do not fix everything at once. Each fix is checked before the next bug's tes
 1. Watch the video + read the Day-1 docs → fill in `hypothesis.md` → `npm run begin`
 2. Fix Bug 1 → fill in `bug-journal/bug-01.md` → push, open a PR, **merge when CI is green**
 3. Pull `main` — the gate bot delivers Bug 2's test → fix it → open a PR → **merge again**
-4. Repeat through Bug 5. **Bugs 3 and 5 are discovery bugs** — see below.
-5. Fill in `REFLECTION.md`, `SKILL-STATEMENT.md`, and `ai-session-log.md`
+4. Repeat through Bug 5. **Bugs 3 and 5 are discovery bugs** — see below. ▶ When Bug 3 arrives:
+   **[Midway video — 40 sec](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/ee4791ccc30756e1df392a00ef791add/watch)**.
+5. Fill in `REFLECTION.md`, `SKILL-STATEMENT.md`, and `ai-session-log.md`. ▶ **[Exit video — 95 sec](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/cf09f6ae6191129cc7217c643bc20877/watch)** — watch before your final PR.
 6. `npm run validate` → open your final pull request → **merge when CI is green**
 
 See [`docs/pull-request-flow.md`](docs/pull-request-flow.md) for the full PR + merge loop.
