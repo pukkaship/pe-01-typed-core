@@ -1,6 +1,6 @@
 # Module 1 — Skill statement
 
-Fill this in after your PR is open and before your weekly sync.
+Fill this in after Bug 5 is fixed and before you open your final module PR.
 CI checks this file is non-empty before the PR can merge.
 
 ## In one sentence I can say in an interview:

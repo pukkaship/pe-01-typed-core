@@ -58,9 +58,15 @@ Read [`docs/day1-micro-loop.md`](day1-micro-loop.md) for the full loop. The shor
 
 - Ask what errors **mean**, not how to fix them
 - Read the code yourself before accepting any suggestion
-- Write the **why** in your bug journal and PR — that's what gets graded
+- Write the **why** in your bug journal and PR — that's what CI validates
 
-## 6. Troubleshooting
+## 6. Merging your PR
+
+Read [`docs/pull-request-flow.md`](pull-request-flow.md). When **CI** is green on your pull
+request, **you** click **Merge pull request** on GitHub. The gate bot delivers the next bug after
+merge — it does not merge for you.
+
+## 7. Troubleshooting
 
 | Problem | Fix |
 |---------|-----|

@@ -7,6 +7,10 @@
 This is **Module 1**. It is calibration: pure local TypeScript, no network, no AI, no database.
 The point is not the meal scorer — it is the habit of making a system **fail loud**.
 
+You're the first engineering hire at Nudge, a two-person startup building an AI coach that talks
+to people about their eating habits. This week's code is what the founder handed you on day one —
+see [`docs/day1-nudge-intro.md`](docs/day1-nudge-intro.md) for the story this program follows.
+
 ---
 
 ## What it does (once fixed)
@@ -33,15 +37,24 @@ grilled chicken → balanced
 
 ---
 
-## Before touching code — Day 1 (~45 min + video)
+## Before touching code — Day 1 (~55 min + video)
 
 ▶ **[Orientation video — 5 min](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/429f3e5831265167bcad9bc544db3395/watch)** — watch first.
 
-1. [`docs/day1-architecture-story.md`](docs/day1-architecture-story.md) — 15 min
-2. [`docs/day1-glossary.md`](docs/day1-glossary.md) — 20 min
-3. [`docs/day1-micro-loop.md`](docs/day1-micro-loop.md) — 10 min
+1. [`docs/day1-nudge-intro.md`](docs/day1-nudge-intro.md) — 5 min — the story this program follows
+2. [`docs/day1-architecture-story.md`](docs/day1-architecture-story.md) — 15 min
+3. [`docs/day1-glossary.md`](docs/day1-glossary.md) — 20 min
+4. [`docs/day1-micro-loop.md`](docs/day1-micro-loop.md) — 10 min
+5. [`docs/day1-ai-workflow.md`](docs/day1-ai-workflow.md) — 10 min — how we use AI on this project
+6. [`docs/day1-design-review.md`](docs/day1-design-review.md) — 5 min — the first section of the
+   design review you'll keep building on all program: testability
 
-Then fill in [`hypothesis.md`](hypothesis.md) and run `npm run begin`.
+Then fill in [`hypothesis.md`](hypothesis.md) (including the new **Design note** section) and run
+`npm run begin`.
+
+**Optional, ungraded warm-up:** [`docs/day1-game-round-0.md`](docs/day1-game-round-0.md) — a
+15–20 min design-judgment exercise, unrelated to Nudge's own code. The first of a recurring,
+scored game that starts for real once the program has given you a framework to score it against.
 
 ---
 
@@ -65,19 +78,20 @@ npm test         # one test fails (Bug 1) — start there
 You do not fix everything at once. Each fix is checked before the next bug's test is revealed.
 
 1. Watch the video + read the Day-1 docs → fill in `hypothesis.md` → `npm run begin`
-2. Fix Bug 1 → fill in `bug-journal/bug-01.md` → push and open a PR
-3. After your PR merges, the gate bot delivers Bug 2's test → fix it → merge again
+2. Fix Bug 1 → fill in `bug-journal/bug-01.md` → push, open a PR, **merge when CI is green**
+3. Pull `main` — the gate bot delivers Bug 2's test → fix it → open a PR → **merge again**
 4. Repeat through Bug 5. **Bugs 3 and 5 are discovery bugs** — see below.
 5. Fill in `REFLECTION.md`, `SKILL-STATEMENT.md`, and `ai-session-log.md`
-6. `npm run validate` → open your final pull request
+6. `npm run validate` → open your final pull request → **merge when CI is green**
+
+See [`docs/pull-request-flow.md`](docs/pull-request-flow.md) for the full PR + merge loop.
 
 > **The discovery bugs (Bugs 3 and 5).** Their tests *pass* when you receive them. That is the point. A test that passes is not necessarily telling the truth — it may only be checking the happy path. Your job is to investigate, reproduce the silent failure, and rewrite the test so it proves the real behaviour. Record how you found each one in its bug journal (the discovery questions are different from the others).
 
 > **What is actually enforced:** `begin` and `unlock` are local scaffolds that keep you honest —
 > they are *not* enforced. The real gate is **CI on your pull request** (`npm run validate` +
-> typecheck + tests + the AI review). On the free track, CI checks your final state; it does not
-> stop you skipping ahead locally. The discipline of doing one bug at a time is yours to keep —
-> and it is exactly what the weekly review reads.
+> typecheck + tests). **You click Merge when CI is green** — the gate bot only runs after merge.
+> The AI PR review is advisory and never blocks merge.
 
 ---
 
