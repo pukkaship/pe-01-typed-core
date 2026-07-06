@@ -1,0 +1,30 @@
+name: Unlock next exercise
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+permissions:
+  pull-requests: write
+jobs:
+  unlock:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post next exercise link
+        uses: actions/github-script@v7
+        env:
+          NEXT_REPO: ${{ vars.NEXT_REPO_URL }}
+        with:
+          script: |
+            const nextRepo = process.env.NEXT_REPO;
+            if (!nextRepo) {
+              console.log('NEXT_REPO_URL not set — skipping unlock comment (final exercise)');
+              return;
+            }
+            const marker = '<!-- pe-unlock -->';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: `${marker}\n\n## Exercise unlocked\n\nYour PR merged and CI passed.\n\nYour next exercise: **${nextRepo}**\n\nClick "Use this template" to create your copy. Clone it, run \`npm install && npm test\`, and watch the tests fail.`
+            });
