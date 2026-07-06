@@ -1,4 +1,29 @@
-# AI Session Log — Module 1
+# AI Session Log â Module 1
 
-The gate bot will deliver a template for this file after you merge Bug 1.
-Fill one entry per bug as you go.
+For each bug: what the AI got right, what it missed,
+and what that tells you about the failure mode it cannot see.
+
+## Bug 1
+- AI got right:
+- AI missed:
+- Lesson:
+
+## Bug 2
+- AI got right:
+- AI missed:
+- Lesson:
+
+## Bug 3
+- AI got right:
+- AI missed:
+- Lesson:
+
+## Bug 4
+- AI got right:
+- AI missed:
+- Lesson:
+
+## Bug 5
+- AI got right:
+- AI missed:
+- Lesson:
