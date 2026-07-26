@@ -1,0 +1,9 @@
+## Why each fix was necessary
+
+Bug 1: Declared Meal and ScorerResult as typed dataclasses so mypy --strict could catch shape mistakes at the meal boundary instead of silently accepting bad data.
+
+## Discovery
+
+Bug 3: The original test only checked that load_meals returned a list. I called it with a read_source that raises and saw it return []. I rewrote the test with pytest.raises so a silent empty list fails the suite.
+
+Bug 5: The original test only scored a valid meal. I passed a Meal with protein_score='5' (string) and got a confident needs-balance instead of an error. I rewrote the test to assert score_meal raises ValueError.

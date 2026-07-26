@@ -1,10 +1,10 @@
 # pe-01-typed-core — A typed meal scorer
 
-> In production, a service once processed every request with a swallowed async error.
+> In production, a service once processed every request with a swallowed error.
 > Every call returned success. Nobody noticed for four hours.
 > This repo has that exact pattern — and four others like it. You fix them one at a time.
 
-This is **Module 1**. It is calibration: pure local TypeScript, no network, no AI, no database.
+This is **Module 1**. It is calibration: pure local Python, no network, no AI, no database.
 The point is not the meal scorer — it is the habit of making a system **fail loud**.
 
 You're the first engineering hire at Nudge, a two-person startup building an AI coach that talks
@@ -15,7 +15,7 @@ see [`docs/day1-nudge-intro.md`](docs/day1-nudge-intro.md) for the story this pr
 
 ## What it does (once fixed)
 
-Reads `fixtures/meals.json`, scores each meal through a deterministic algorithm, and prints one
+Reads meal fixtures, scores each meal through a deterministic algorithm, and returns one
 signal per meal:
 
 ```
@@ -28,12 +28,11 @@ grilled chicken → balanced
 
 ## What is broken
 
-- The scorer accepts any input shape — it will not tell you when the data is wrong (Bug 1).
-- A malformed meals file fails with a raw, contextless error (Bug 2).
-- A missing file is swallowed — the program "succeeds" with no data (Bug 3).
+- The models are untyped — mypy cannot tell you when a meal shape is wrong (Bug 1).
+- A misspelled verdict string looks like a clean signal at runtime (Bug 2).
+- A failed read is swallowed — the loader "succeeds" with an empty list (Bug 3).
 - The "balanced" rule uses the wrong logic, so some meals are mislabelled (Bug 4).
-- Invalid input gets a confident, plausible answer instead of an error, and the process exits 0
-  even when it failed (Bug 5).
+- Invalid input gets a confident, plausible answer instead of an error (Bug 5).
 
 ---
 
@@ -44,13 +43,13 @@ grilled chicken → balanced
 1. [`docs/day1-nudge-intro.md`](docs/day1-nudge-intro.md) — 5 min — the story this program follows
 2. [`docs/day1-architecture-story.md`](docs/day1-architecture-story.md) — 15 min
 3. [`docs/day1-glossary.md`](docs/day1-glossary.md) — 20 min
-4. [`docs/day1-micro-loop.md`](docs/day1-micro-loop.md) — 10 min
+4. [`docs/pull-request-flow.md`](docs/pull-request-flow.md) — 10 min
 5. [`docs/day1-ai-workflow.md`](docs/day1-ai-workflow.md) — 10 min — how we use AI on this project
 6. [`docs/day1-design-review.md`](docs/day1-design-review.md) — 5 min — the first section of the
    design review you'll keep building on all program: testability
 
 Then fill in [`hypothesis.md`](hypothesis.md) (including the new **Design note** section) and run
-`npm run begin`.
+`node scripts/begin.cjs`.
 
 **Optional, ungraded warm-up:** [`docs/day1-game-round-0.md`](docs/day1-game-round-0.md) — a
 15–20 min design-judgment exercise, unrelated to Nudge's own code. The first of a recurring,
@@ -67,31 +66,32 @@ Then read [`docs/cursor-setup.md`](docs/cursor-setup.md) (2 min) and continue wi
 orientation below.
 
 ```bash
-node -v          # need 20+ (22 recommended — see .nvmrc)
-npm install      # first time only; re-run after pulling dependency changes
-npm run begin    # fails until hypothesis.md is complete
-npm test         # one test fails (Bug 1) — start there
+python --version          # need 3.12+
+pip install -r requirements-dev.txt
+node scripts/begin.cjs    # fails until hypothesis.md is complete
+pytest                    # one test fails (Bug 1) — start there
+mypy src                  # must stay clean (Bug 1 is the mypy gate)
 ```
 
 ## How to proceed — one bug at a time
 
 You do not fix everything at once. Each fix is checked before the next bug's test is revealed.
 
-1. Watch the video + read the Day-1 docs → fill in `hypothesis.md` → `npm run begin`
+1. Watch the video + read the Day-1 docs → fill in `hypothesis.md` → `node scripts/begin.cjs`
 2. Fix Bug 1 → fill in `bug-journal/bug-01.md` → push, open a PR, **merge when CI is green**
 3. Pull `main` — the gate bot delivers Bug 2's test → fix it → open a PR → **merge again**
 4. Repeat through Bug 5. **Bugs 3 and 5 are discovery bugs** — see below. ▶ When Bug 3 arrives:
    **[Midway video — 40 sec](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/ee4791ccc30756e1df392a00ef791add/watch)**.
 5. Fill in `REFLECTION.md`, `SKILL-STATEMENT.md`, and `ai-session-log.md`. ▶ **[Exit video — 95 sec](https://customer-r5z7zoebyw1di9aq.cloudflarestream.com/cf09f6ae6191129cc7217c643bc20877/watch)** — watch before your final PR.
-6. `npm run validate` → open your final pull request → **merge when CI is green**
+6. `node scripts/validate_pr.cjs` → open your final pull request → **merge when CI is green**
 
 See [`docs/pull-request-flow.md`](docs/pull-request-flow.md) for the full PR + merge loop.
 
 > **The discovery bugs (Bugs 3 and 5).** Their tests *pass* when you receive them. That is the point. A test that passes is not necessarily telling the truth — it may only be checking the happy path. Your job is to investigate, reproduce the silent failure, and rewrite the test so it proves the real behaviour. Record how you found each one in its bug journal (the discovery questions are different from the others).
 
 > **What is actually enforced:** `begin` and `unlock` are local scaffolds that keep you honest —
-> they are *not* enforced. The real gate is **CI on your pull request** (`npm run validate` +
-> typecheck + tests). **You click Merge when CI is green** — the gate bot only runs after merge.
+> they are *not* enforced. The real gate is **CI on your pull request** (`node scripts/validate_pr.cjs` +
+> mypy + pytest). **You click Merge when CI is green** — the gate bot only runs after merge.
 > The AI PR review is advisory and never blocks merge.
 
 ---

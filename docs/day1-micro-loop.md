@@ -7,7 +7,7 @@ One page. This is the loop you run for every single bug, this week and every wee
 2. Form a hypothesis about what is wrong — BEFORE editing anything
 3. Ask AI what the error MEANS — not to fix the code for you
 4. Make the smallest change that tests your hypothesis
-5. Run npm test
+5. Run pytest
 6. If green: write down WHY the fix was necessary before moving on
 ```
 
@@ -16,10 +16,10 @@ One page. This is the loop you run for every single bug, this week and every wee
 ```
 Error:      Argument of type 'string' is not assignable to parameter of type 'number'.
 Hypothesis: "I'm passing a value that came from JSON without converting it to a number."
-Ask AI:     "What does 'not assignable' mean in TypeScript?"  (understand — don't outsource)
+Ask AI:     "What does 'not assignable' mean in Python?"  (understand — don't outsource)
 Smallest fix: convert the value with Number(...) at the point it is used
 Run test:   green
-Write down: "Values parsed from JSON are strings unless converted. TypeScript caught it at
+Write down: "Values parsed from JSON are strings unless converted. Python caught it at
              compile time instead of letting a wrong calculation run."
 ```
 

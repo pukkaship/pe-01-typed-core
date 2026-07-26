@@ -1,7 +1,7 @@
 # Module 1 — Pre-code hypothesis
 
-Fill this in **before** you run `npm test` or touch any code.
-Then run `npm run begin` — it checks this file before you start.
+Fill this in **before** you run `pytest` or touch any code.
+Then run `node scripts/begin.cjs` — it checks this file before you start.
 
 ## After watching the orientation video, finish this sentence:
 

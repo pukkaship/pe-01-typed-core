@@ -13,7 +13,7 @@ before real I/O muddies it.
   an accident of this being a small exercise; it's the property that makes a function cheap to
   test at all. Notice it now, because most of what you'll build later (a route handler, a queue
   worker) will *not* be this clean by default — you'll have to work to carve a pure core out of it.
-- **Name test cases before code: happy / failure / most-likely-to-regress.** `bug-01.test.ts` is
+- **Name test cases before code: happy / failure / most-likely-to-regress.** `tests/test_bug_01.py` is
   already written for you — read it as a worked example of naming a failure case *before* touching
   the fix, not just as an obstacle to clear.
 - **Which existing test should a new one mirror?** As Bugs 2–5 arrive, each staged test is written

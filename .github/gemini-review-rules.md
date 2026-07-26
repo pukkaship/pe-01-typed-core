@@ -18,7 +18,7 @@ Check these in order (for in-scope bugs only):
    silently doing the wrong thing?
 
 4. **Skill statement (Bug 5 only):** is the one-sentence claim specific enough to say in an interview?
-   "I fixed TypeScript bugs" is not. "I can explain why a process that exits 0 on failure lies to
+   "I fixed Python bugs" is not. "I can explain why a process that exits 0 on failure lies to
    every script that calls it" is.
 
 5. **Tests:** did the learner reason about failure paths, not just the happy path?

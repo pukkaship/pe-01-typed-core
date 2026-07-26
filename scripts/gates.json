@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "module": "pe-01",
+  "discoveryBugs": [3, 5],
+  "begin": {
+    "minWords": 100,
+    "mustMatch": ["hypothesis|error", "the rule is"],
+    "successMessage": "Ready. Now run: pytest — one test is failing (Bug 1). Start there."
+  },
+  "unlockKeywords": {
+    "1": ["dataclass|typed|mypy|annotation|strict"],
+    "2": ["literal|balenced|off-balance|typo|signal"],
+    "3": ["discover|silent|raises|missing|found|pytest\\.raises"],
+    "4": ["balanced|operator|\\band\\b|fibre|protein"],
+    "5": ["discover|invalid|raise|valueerror|confident"]
+  },
+  "discoveryRewrites": {
+    "3": {
+      "anyOf": ["pytest\\.raises|raises\\("],
+      "simLine": "    with pytest.raises(RuntimeError):\n        load_meals(bad_source)",
+      "failMessage": "test_bug_03.py still only checks that load_meals returns a list — rewrite it to assert the call raises when the source fails (pytest.raises). That is the discovery: a successful return is not proof the file was found."
+    },
+    "5": {
+      "anyOf": ["pytest\\.raises|raises\\(.*ValueError|raises\\(ValueError"],
+      "simLine": "    with pytest.raises(ValueError):\n        score_meal(bad_meal)",
+      "failMessage": "test_bug_05.py still only checks that a valid meal scores correctly — rewrite it to assert score_meal raises ValueError when a field is not a plain int. That is the discovery: a confident answer is not proof the input was valid."
+    }
+  },
+  "requiredPRSections": {
+    "always": ["Why each fix was necessary"],
+    "atBug5": ["Discovery"]
+  },
+  "artifactChecks": [
+    {
+      "whenBugAtLeast": 1,
+      "file": "src/models.py",
+      "regex": "@dataclass|class\\s+Meal\\s*[:(]|class\\s+ScorerResult\\s*[:(]",
+      "failMessage": "src/models.py has no typed Meal / ScorerResult dataclass — Bug 1 asks you to declare them with typed fields so mypy --strict can catch shape mistakes"
+    }
+  ],
+  "minJournalWords": 80,
+  "capstone": {
+    "reflectionMinWords": 30,
+    "skillStatementMinChars": 20,
+    "aiSessionLogMinWords": 20
+  }
+}

@@ -28,16 +28,16 @@ cursor .
 
 ## 3. Install dependencies
 
-From the repo root (the folder that contains `package.json`):
+From the repo root (the folder that contains `pyproject.toml`):
 
 ```bash
-node -v          # need 20+ (22 recommended — see .nvmrc)
-npm install
+python --version   # need 3.12+ (see .python-version)
+pip install -r requirements-dev.txt
 ```
 
-This downloads Vitest, TypeScript, and the rest. It should finish in under a minute with no errors.
-If install fails with `ESTRICTALLOWSCRIPTS` or mentions `esbuild`, pull the latest `main` — the
-repo ships an approved script list for npm 11+.
+This installs pytest and mypy. It should finish in under a minute with no errors.
+Gate scripts (`begin` / `unlock` / `validate_pr`) need Node 20+ available on your PATH —
+they are plain `.cjs` files, no `npm install` required.
 
 ## 4. Verify the pack loaded
 
@@ -54,7 +54,7 @@ Try it: ask the agent *"fix bug 1 for me"* — it should respond with questions,
 
 ## 5. How to use AI here
 
-Read [`docs/day1-micro-loop.md`](day1-micro-loop.md) for the full loop. The short version:
+Read [`docs/pull-request-flow.md`](pull-request-flow.md) for the full loop. The short version:
 
 - Ask what errors **mean**, not how to fix them
 - Read the code yourself before accepting any suggestion
@@ -70,11 +70,12 @@ merge — it does not merge for you.
 
 | Problem | Fix |
 |---------|-----|
-| `npm install` fails on `esbuild` / `ESTRICTALLOWSCRIPTS` | Pull latest `main` (includes `allowScripts` in `package.json`) |
-| `vitest: command not found` | Run `npm install` from the repo root first |
+| `pytest: command not found` | Run `pip install -r requirements-dev.txt` from the repo root first |
+| `mypy: command not found` | Same as above — both come from `requirements-dev.txt` |
 | Rules not showing | Re-open the repo folder (not a parent monorepo) |
 | Clone fails (private repo) | Sign in to GitHub inside Cursor; use HTTPS clone |
 | Agent still writes fixes | Check `.cursor/rules/` exists; restart Cursor |
-| Using VS Code or another editor | Follow the AI rule in the README and `docs/day1-micro-loop.md` — gates are editor-agnostic |
+| `node: command not found` when running begin/validate | Install Node 20+ (needed only for the gate scripts, not for pytest/mypy) |
+| Using VS Code or another editor | Follow the AI rule in the README and `docs/pull-request-flow.md` — gates are editor-agnostic |
 
 Cursor is the recommended runtime. The curriculum and gates work in any editor — the `.cursor/` folder is optional but strongly recommended.
